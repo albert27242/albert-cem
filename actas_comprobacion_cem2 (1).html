@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Actas de Comprobación · Tránsito · CEM Esquina</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Colores CEM */
+  --cem-azul:       #0F2744;
+  --cem-azul-medio: #1A3D5C;
+  --cem-azul-palido:#E8EEF4;
+  --cem-esquina:    #3AAEE0;
+  --cem-verde:      #6CBF6A;
+  --cem-amarillo:   #F5C842;
+  --cem-rojo:       #E05C4A;
+
+  /* Semánticos */
+  --bg:       #F4F7FA;
+  --surface:  #FFFFFF;
+  --surface2: #EEF3F8;
+  --border:   #C8D6E2;
+  --text:     #1A2D3D;
+  --text2:    #5A7387;
+  --text3:    #8FA8BC;
+
+  /* Tipografía */
+  --condensed: 'Barlow Condensed', sans-serif;
+  --body:      'Barlow', sans-serif;
+  --mono:      'DM Mono', monospace;
+
+  --r: 10px;
+  --shadow: 0 1px 4px rgba(15,39,68,.08);
+  --shadow-md: 0 4px 16px rgba(15,39,68,.10);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 64px;
+}
+
+/* ── HEADER ── */
+.hdr {
+  background: var(--cem-azul);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 2px 12px rgba(15,39,68,.25);
+}
+.hdr-inner {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px solid var(--cem-esquina);
+}
+.hdr-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+.hdr-logo-top {
+  font-family: var(--condensed);
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--cem-esquina);
+  letter-spacing: .06em;
+  line-height: 1;
+}
+.hdr-logo-sub {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: rgba(58,174,224,.6);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.hdr-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(200,214,226,.25);
+  flex-shrink: 0;
+}
+.hdr-text { flex: 1; }
+.hdr-title {
+  font-family: var(--condensed);
+  font-size: 19px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: .03em;
+  line-height: 1;
+}
+.hdr-badge {
+  display: inline-block;
+  background: var(--cem-amarillo);
+  color: var(--cem-azul);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 3px;
+  letter-spacing: .08em;
+  margin-top: 4px;
+}
+.hdr-date {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(255,255,255,.55);
+  padding: 6px 16px;
+  background: rgba(0,0,0,.15);
+  letter-spacing: .04em;
+}
+
+/* ── CONTENEDOR GENERAL ── */
+.container { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+
+/* ── STATS ── */
+.stats {
+  background: var(--cem-azul);
+  border-radius: var(--r);
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+.stats::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cem-esquina), var(--cem-verde), var(--cem-amarillo));
+}
+.st-item { text-align: center; padding: 4px 0; }
+.st-item + .st-item { border-left: 1px solid rgba(200,214,226,.15); }
+.st-val {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1;
+}
+.st-val.a { color: var(--cem-amarillo); }
+.st-val.r { color: var(--cem-rojo); }
+.st-val.g { color: var(--cem-verde); }
+.st-lbl {
+  font-family: var(--condensed);
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,.45);
+  margin-top: 4px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+/* ── TARJETA GENÉRICA ── */
+.card {
+  background: var(--surface);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.card.accent-azul  { border-top: 3px solid var(--cem-esquina); }
+.card.accent-verde { border-top: 3px solid var(--cem-verde); }
+.card.accent-amarillo { border-top: 3px solid var(--cem-amarillo); }
+.card.accent-rojo  { border-top: 3px solid var(--cem-rojo); }
+.card.accent-azul-oscuro { border-top: 3px solid var(--cem-azul); }
+
+.card-hdr {
+  padding: 10px 14px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-hdr-dot {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+}
+.card-hdr-lbl {
+  font-family: var(--condensed);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  flex: 1;
+}
+.card-hdr-lbl.azul    { color: var(--cem-esquina); }
+.card-hdr-lbl.verde   { color: var(--cem-verde); }
+.card-hdr-lbl.amarillo{ color: #B8911A; }
+.card-hdr-lbl.rojo    { color: var(--cem-rojo); }
+.card-hdr-lbl.azul-oscuro { color: var(--cem-azul-medio); }
+
+/* ── CONFIG ── */
+.cfg-note {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  padding: 10px 14px;
+  line-height: 1.6;
+  background: var(--surface2);
+  border-top: 1px solid var(--border);
+}
+.cfg-mini {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+}
+.cfg-mini-lbl {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+}
+.cfg-mini-ok {
+  color: var(--cem-verde);
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+/* ── INPUTS ── */
+.field {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 50px;
+}
+.field:last-child { border-bottom: none; }
+.field.col { flex-direction: column; align-items: stretch; gap: 6px; }
+.field-lbl {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  flex: 1;
+  line-height: 1.3;
+}
+.field-inp {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 13px;
+  padding: 7px 10px;
+  outline: none;
+  width: 100%;
+  transition: border-color .15s;
+}
+.field-inp:focus { border-color: var(--cem-esquina); background: #fff; }
+.field-inp.short { width: 150px; }
+textarea.field-inp { resize: vertical; min-height: 70px; }
+
+.inp-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.inp-lbl {
+  font-family: var(--condensed);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text3);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* ── GRID 2 COLS para actuantes ── */
+.act-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.act-field {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+.act-field:nth-child(2n) { border-right: none; }
+.act-field:nth-last-child(-n+2) { border-bottom: none; }
+.act-field-lbl {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  margin-bottom: 5px;
+  letter-spacing: .04em;
+}
+
+/* ── TIPO ACTA ── */
+.tipo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 14px;
+}
+.tipo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 10px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all .15s;
+  background: var(--surface2);
+}
+.tipo-item:active { transform: scale(.97); }
+.tipo-item.selected-multa {
+  background: rgba(245,200,66,.1);
+  border-color: var(--cem-amarillo);
+}
+.tipo-item.selected-secuestro {
+  background: rgba(224,92,74,.1);
+  border-color: var(--cem-rojo);
+}
+.tipo-icon { font-size: 26px; }
+.tipo-lbl {
+  font-family: var(--condensed);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  color: var(--text2);
+  text-align: center;
+}
+.tipo-item.selected-multa .tipo-lbl { color: #B8911A; }
+.tipo-item.selected-secuestro .tipo-lbl { color: var(--cem-rojo); }
+
+/* ── TOGGLES ── */
+.tg-wrap { display: flex; gap: 5px; flex-shrink: 0; flex-wrap: wrap; }
+.tg-btn {
+  min-width: 42px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text2);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .12s;
+  -webkit-user-select: none;
+  user-select: none;
+  padding: 0 8px;
+}
+.tg-btn.si { background: rgba(108,191,106,.18); border-color: var(--cem-verde); color: var(--cem-verde); }
+.tg-btn.no { background: rgba(224,92,74,.15); border-color: var(--cem-rojo); color: var(--cem-rojo); }
+
+/* ── DOC GRID ── */
+.doc-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.doc-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  gap: 10px;
+}
+.doc-item:last-child { border-bottom: none; }
+.doc-lbl {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  flex: 1;
+}
+
+/* ── SECUESTRO SECTION ── */
+.secuestro-section { display: none; }
+.secuestro-section.visible { display: block; }
+.secuestro-field {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.secuestro-field:last-child { border-bottom: none; }
+.secuestro-field-lbl {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text2);
+}
+
+/* ── FOTOS ── */
+.fotos-seccion {
+  padding: 14px;
+  background: rgba(224,92,74,.05);
+  border-top: 2px solid var(--cem-rojo);
+}
+.fotos-lbl {
+  font-family: var(--condensed);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--cem-rojo);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.fotos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.foto-btn {
+  aspect-ratio: 1;
+  border: 2px dashed var(--cem-rojo);
+  border-radius: 10px;
+  background: rgba(224,92,74,.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all .15s;
+  position: relative;
+  overflow: hidden;
+}
+.foto-btn.has-image { border-style: solid; background: var(--surface); }
+.foto-icon { font-size: 24px; }
+.foto-lbl {
+  font-family: var(--condensed);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--cem-rojo);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.foto-preview { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+.foto-remove {
+  position: absolute; top: 4px; right: 4px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--cem-rojo); color: #fff; border: none;
+  font-size: 12px; cursor: pointer; z-index: 10;
+  display: flex; align-items: center; justify-content: center;
+}
+.foto-input { display: none; }
+
+/* ── ACCIONES ── */
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.btn {
+  height: 48px;
+  border-radius: 8px;
+  border: none;
+  font-family: var(--condensed);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: .05em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: opacity .12s, transform .1s;
+}
+.btn:active { opacity: .85; transform: scale(.98); }
+.btn-save {
+  background: var(--cem-azul);
+  color: #fff;
+  grid-column: 1 / -1;
+}
+.btn-clear {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.btn-export {
+  background: rgba(108,191,106,.15);
+  border: 1px solid var(--cem-verde);
+  color: #3A7A39;
+}
+
+/* ── LOG ── */
+.log-title {
+  font-family: var(--condensed);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin-bottom: 8px;
+}
+.log-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow);
+}
+.chips { display: flex; flex-wrap: wrap; gap: 4px; flex: 1; }
+.chip {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  background: var(--surface2);
+}
+.chip.r { background: rgba(224,92,74,.1); border-color: var(--cem-rojo); color: var(--cem-rojo); }
+.chip.g { background: rgba(108,191,106,.1); border-color: var(--cem-verde); color: #3A7A39; }
+.chip.a { background: rgba(245,200,66,.15); border-color: var(--cem-amarillo); color: #8A6A00; }
+.chip.b { background: rgba(58,174,224,.1); border-color: var(--cem-esquina); color: #1A7AB5; }
+.chip.t { background: var(--cem-azul-palido); border-color: var(--cem-azul-medio); color: var(--cem-azul-medio); }
+.del-btn {
+  width: 28px; height: 28px; border-radius: 6px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--text3); cursor: pointer; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--cem-azul);
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-family: var(--condensed);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+  z-index: 100;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 4px 20px rgba(15,39,68,.3);
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.ok { background: var(--cem-verde); color: var(--cem-azul); }
+.toast.err { background: var(--cem-rojo); }
+
+/* Separador de sección */
+.sec-divider {
+  font-family: var(--condensed);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 4px 0 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sec-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Edit btn */
+.cfg-edit-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-inner">
+    <div class="hdr-logo">
+      <div class="hdr-logo-top">CEM</div>
+      <div class="hdr-logo-sub">Esquina · Ctes.</div>
+    </div>
+    <div class="hdr-divider"></div>
+    <div class="hdr-text">
+      <div class="hdr-title">Actas de Comprobación</div>
+      <span class="hdr-badge">TRÁNSITO · MUNICIPALIDAD DE ESQUINA</span>
+    </div>
+  </div>
+  <div class="hdr-date" id="hdr-date">cargando...</div>
+</div>
+
+<div class="container">
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="st-item">
+      <div class="st-val a" id="st-total">0</div>
+      <div class="st-lbl">Actas</div>
+    </div>
+    <div class="st-item">
+      <div class="st-val r" id="st-secuestro">0</div>
+      <div class="st-lbl">c/ Secuestro</div>
+    </div>
+    <div class="st-item">
+      <div class="st-val g" id="st-hoy">0</div>
+      <div class="st-lbl">Hoy</div>
+    </div>
+  </div>
+
+  <!-- CONFIG COMPLETA -->
+  <div class="card accent-azul-oscuro" id="cfg-panel">
+    <div class="card-hdr">
+      <div class="card-hdr-dot" style="background:var(--cem-azul-medio);"></div>
+      <span class="card-hdr-lbl azul-oscuro">Configuración técnica — solo una vez</span>
+    </div>
+    <div class="field col">
+      <span class="field-lbl">URL del Script</span>
+      <input class="field-inp" id="cfg-url" placeholder="URL del Apps Script — la provee el supervisor">
+    </div>
+    <div style="padding: 0 14px 14px;">
+      <button class="btn btn-save" style="height:40px;font-size:14px;" onclick="guardarConfig()">Guardar URL</button>
+    </div>
+    <div class="cfg-note">Una vez guardada no hay que volver a tocarla. Los datos de inspector y secretario se completan en cada acta.</div>
+  </div>
+
+  <!-- CONFIG MINI -->
+  <div class="card" id="cfg-mini" style="display:none;">
+    <div class="cfg-mini">
+      <span class="cfg-mini-lbl">Script <span class="cfg-mini-ok">✓ configurado</span></span>
+      <button class="cfg-edit-btn" onclick="editarConfig()">Cambiar URL</button>
+    </div>
+  </div>
+
+  <!-- ACTUANTES -->
+  <div class="card accent-azul">
+    <div class="card-hdr">
+      <div class="card-hdr-dot" style="background:var(--cem-esquina);"></div>
+      <span class="card-hdr-lbl azul">Actuantes — completar en cada acta</span>
+    </div>
+    <div class="act-grid">
+      <div class="act-field">
+        <div class="act-field-lbl">Inspector/a de tránsito</div>
+        <input class="field-inp" id="act-inspector" placeholder="Apellido y nombre">
+      </div>
+      <div class="act-field">
+        <div class="act-field-lbl">Legajo inspector/a</div>
+        <input class="field-inp" id="act-legajo-insp" placeholder="N° legajo">
+      </div>
+      <div class="act-field">
+        <div class="act-field-lbl">Secretario/a</div>
+        <input class="field-inp" id="act-secretario" placeholder="Apellido y nombre">
+      </div>
+      <div class="act-field">
+        <div class="act-field-lbl">Legajo secretario/a</div>
+        <input class="field-inp" id="act-legajo-sec" placeholder="N° legajo">
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPO DE ACTA -->
+  <div class="card accent-rojo">
+    <div class="card-hdr">
+      <div class="card-hdr-dot" style="background:var(--cem-rojo);"></div>
+      <span class="card-hdr-lbl rojo">Tipo de Acta</span>
+    </div>
+    <div class="tipo-grid">
+      <div class="tipo-item" id="tipo-multa" onclick="setTipoActa('multa')">
+        <span class="tipo-icon">📄</span>
+        <span class="tipo-lbl">MULTA</span>
+      </div>
+      <div class="tipo-item" id="tipo-secuestro" onclick="setTipoActa('secuestro')">
+        <span class="tipo-icon">🚫</span>
+        <span class="tipo-lbl">SECUESTRO + MULTA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATOS DEL SECUESTRO -->
+  <div class="card accent-rojo secuestro-section" id="secuestro-section">
+    <div class="card-hdr">
+      <div class="card-hdr-dot" style="background:var(--cem-rojo);"></div>
+      <span class="card-hdr-lbl rojo">Datos del Vehículo — Secuestro</span>
+    </div>
+    <div class="secuestro-field">
+      <span class="secuestro-field-lbl">Tipo de vehículo</span>
+      <input class="field-inp" type="text" id="f-sec-tipo" placeholder="Moto / Auto / Camioneta...">
+    </div>
+    <div class="secuestro-field">
+      <span class="secuestro-field-lbl">Marca</span>
+      <input class="field-inp" type="text" id="f-sec-marca" placeholder="Ej: Honda">
+    </div>
+    <div class="secuestro-field">
+      <span class="secuestro-field-lbl">Modelo</span>
+      <input class="field-inp" type="text" id="f-sec-modelo" placeholder="Ej: Wave 110">
+    </div>
+    <div class="secuestro-field">
+      <span class="secuestro-field-lbl">Número de chasis</span>
+      <input class="field-inp" type="text" id="f-sec-chasis" placeholder="N° de chasis completo">
+    </div>
+    <div class="secuestro-field">
+      <span class="secuestro-field-lbl">Color</span>
+      <input class="field-inp" type="text" id="f-sec-color" placeholder="Ej: Rojo, Negro, Azul...">
+    </div>
+    <div class="secuestro-field">
+      <span class="secuestro-field-lbl">Número de dominio (Patente)</span>
+      <input class="field-inp" type="text" id="f-sec-dominio" placeholder="Ej: A123BCD o 'no posee'">
+    </div>
+
+    <!-- FOTOS -->
+    <div class="fotos-seccion">
+      <div class="fotos-lbl">📸 Fotos del vehículo (obligatorio)</div>
+      <div class="fotos-grid">
+        <div>
+          <div class="foto-btn" id="foto-frente-btn" onclick="document.getElementById('foto-frente-input').click()">
+            <span class="foto-icon">📷</span>
+            <span class="foto-lbl">FRENTE</span>
+          </div>
+          <input type="file" class="foto-input" id="foto-frente-input" accept="image/*" capture="environment" onchange="handleFoto(this,'frente')">
+        </div>
+        <div>
+          <div class="foto-btn" id="foto-dorso-btn" onclick="document.getElementById('foto-dorso-input').click()">
+            <span class="foto-icon">📷</span>
+            <span class="foto-lbl">DORSO</span>
+          </div>
+          <input type="file" class="foto-input" id="foto-dorso-input" accept="image/*" capture="environment" onchange="handleFoto(this,'dorso')">
+        </div>
+        <div>
+          <div class="foto-btn" id="foto-lateral-btn" onclick="document.getElementById('foto-lateral-input').click()">
+            <span class="foto-icon">📷</span>
+            <span class="foto-lbl">LATERAL</span>
+          </div>
+          <input type="file" class="foto-input" id="foto-lateral-input" accept="image/*" capture="environment" onchange="handleFoto(this,'lateral')">
+        </div>
+      </div>
+    </div>
+
+    <!-- Situación del infractor -->
+    <div class="secuestro-field" style="background:rgba(224,92,74,.05);">
+      <span class="secuestro-field-lbl" style="color:var(--cem-rojo);">¿Infractor se niega a firmar?</span>
+      <div class="tg-wrap" style="margin-top:4px;">
+        <div class="tg-btn" onclick="setSecuestroDoc('niega_firmar','SI',this)">SI</div>
+        <div class="tg-btn" onclick="setSecuestroDoc('niega_firmar','NO',this)">NO</div>
+      </div>
+    </div>
+    <div class="secuestro-field" style="background:rgba(224,92,74,.05);">
+      <span class="secuestro-field-lbl" style="color:var(--cem-rojo);">¿Se da a la fuga?</span>
+      <div class="tg-wrap" style="margin-top:4px;">
+        <div class="tg-btn" onclick="setSecuestroDoc('fuga','SI',this)">SI</div>
+        <div class="tg-btn" onclick="setSecuestroDoc('fuga','NO',this)">NO</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATOS DEL ACTA -->
+  <div class="card accent-amarillo">
+    <div class="card-hdr">
+      <div class="card-hdr-dot" style="background:var(--cem-amarillo);"></div>
+      <span class="card-hdr-lbl amarillo">Datos del Acta</span>
+    </div>
+    <div class="field">
+      <span class="field-lbl">N° Acta</span>
+      <input class="field-inp short" type="text" id="f-nro-acta" placeholder="Ej: 21507">
+    </div>
+    <div class="field">
+      <span class="field-lbl">Fecha del hecho</span>
+      <input class="field-inp short" type="date" id="f-fecha">
+    </div>
+    <div class="field">
+      <span class="field-lbl">Hora del hecho</span>
+      <input class="field-inp short" type="time" id="f-hora">
+    </div>
+    <div class="field col">
+      <span class="field-lbl">Dirección del hecho</span>
+      <input class="field-inp" type="text" id="f-direccion" placeholder="Calle, intersección, referencia...">
+    </div>
+  </div>
+
+  <!-- CONDUCTOR -->
+  <div class="card accent-azul">
+    <div class="card-hdr">
+      <div class="card-hdr-dot" style="background:var(--cem-esquina);"></div>
+      <span class="card-hdr-lbl azul">Conductor / Infractor</span>
+    </div>
+    <div class="field col">
+      <span class="field-lbl">Apellido y nombre</span>
+      <input class="field-inp" type="text" id="f-conductor" placeholder="Nombre completo del conductor">
+    </div>
+    <div class="field col">
+      <span class="field-lbl">DNI</span>
+      <input class="field-inp" type="text" id="f-dni" placeholder="Número de documento">
+    </div>
+    <div class="field col">
+      <span class="field-lbl">Domicilio</span>
+      <input class="field-inp" type="text" id="f-domicilio" placeholder="Dirección completa del infractor">
+    </div>
+  </div>
+
+  <!-- DOCUMENTACIÓN -->
+  <div class="card accent-azul" id="documentacion-section">
+    <div class="card-hdr">
+      <div class="card-hdr-dot" style="background:var(--cem-esquina);"></div>
+      <span class="card-hdr-lbl azul">Documentación del conductor</span>
+    </div>
+    <div class="doc-grid">
+      <div class="doc-item">
+        <span class="doc-lbl">¿Posee registro / licencia?</span>
+        <div class="tg-wrap">
+          <div class="tg-btn" onclick="setDoc('registro','SI',this)">SI</div>
+          <div class="tg-btn" onclick="setDoc('registro','NO',this)">NO</div>
+        </div>
+      </div>
+      <div class="doc-item">
+        <span class="doc-lbl">¿Usa casco? (si aplica)</span>
+        <div class="tg-wrap">
+          <div class="tg-btn" onclick="setDoc('casco','SI',this)">SI</div>
+          <div class="tg-btn" onclick="setDoc('casco','NO',this)">NO</div>
+        </div>
+      </div>
+      <div class="doc-item">
+        <span class="doc-lbl">¿Posee seguro?</span>
+        <div class="tg-wrap">
+          <div class="tg-btn" onclick="setDoc('seguro','SI',this)">SI</div>
+          <div class="tg-btn" onclick="setDoc('seguro','NO',this)">NO</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OBSERVACIONES -->
+  <div class="card accent-azul">
+    <div class="card-hdr">
+      <div class="card-hdr-dot" style="background:var(--cem-esquina);"></div>
+      <span class="card-hdr-lbl azul">Observaciones</span>
+    </div>
+    <div class="field col">
+      <span class="field-lbl">Descripción del hecho / Infracciones</span>
+      <textarea class="field-inp" id="f-descripcion" placeholder="Detallar las infracciones observadas, estado del vehículo, etc..." rows="4"></textarea>
+    </div>
+  </div>
+
+  <!-- ACCIONES -->
+  <div class="actions">
+    <button class="btn btn-save" onclick="guardarActa()">📋 Registrar acta</button>
+    <button class="btn btn-clear" onclick="limpiar()">Limpiar</button>
+    <button class="btn btn-export" onclick="exportCSV()">Exportar CSV</button>
+  </div>
+
+  <!-- LOG -->
+  <div id="log-wrap" style="display:none;">
+    <div class="log-title">Actas registradas</div>
+    <div id="log-list"></div>
+  </div>
+
+</div><!-- /container -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+var CKEY = 'comprobacion_cfg';
+var RKEY = 'comprobacion_rows';
+var cfg = {url:''};
+var rows = [];
+var fotos = {frente:null, dorso:null, lateral:null};
+var form = { tipo_acta:'', registro:'', casco:'', seguro:'', niega_firmar:'', fuga:'' };
+
+function init() {
+  try { var c = localStorage.getItem(CKEY); if (c) { cfg = JSON.parse(c); document.getElementById('cfg-url').value = cfg.url || ''; } } catch(e) {}
+  mostrarEstadoConfig();
+  try { var r = localStorage.getItem(RKEY); if (r) rows = JSON.parse(r); } catch(e) {}
+  setFechaHoraActual();
+  actualizarFecha();
+  setInterval(actualizarFecha, 30000);
+  renderStats();
+  renderLog();
+}
+
+function setFechaHoraActual() {
+  var now = new Date();
+  document.getElementById('f-fecha').value = now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+  document.getElementById('f-hora').value = String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+}
+
+function actualizarFecha() {
+  var now = new Date();
+  var dias = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  var meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  document.getElementById('hdr-date').textContent = dias[now.getDay()]+' '+now.getDate()+' de '+meses[now.getMonth()]+' · '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+}
+
+function mostrarEstadoConfig() {
+  var tiene = cfg.url && cfg.url.length > 0;
+  document.getElementById('cfg-panel').style.display = tiene ? 'none' : 'block';
+  document.getElementById('cfg-mini').style.display = tiene ? 'block' : 'none';
+}
+
+function guardarConfig() {
+  var url = document.getElementById('cfg-url').value.trim();
+  if (!url) { showToast('Ingresá la URL del script', 'err'); return; }
+  cfg = {url:url};
+  try { localStorage.setItem(CKEY, JSON.stringify(cfg)); } catch(e) {}
+  mostrarEstadoConfig();
+  showToast('URL guardada', 'ok');
+}
+
+function editarConfig() {
+  document.getElementById('cfg-panel').style.display = 'block';
+  document.getElementById('cfg-mini').style.display = 'none';
+}
+
+function setTipoActa(tipo) {
+  form.tipo_acta = tipo;
+  document.getElementById('tipo-multa').className = 'tipo-item';
+  document.getElementById('tipo-secuestro').className = 'tipo-item';
+  if (tipo === 'multa') {
+    document.getElementById('tipo-multa').classList.add('selected-multa');
+    document.getElementById('secuestro-section').classList.remove('visible');
+    document.getElementById('documentacion-section').style.display = 'block';
+  } else {
+    document.getElementById('tipo-secuestro').classList.add('selected-secuestro');
+    document.getElementById('secuestro-section').classList.add('visible');
+    document.getElementById('documentacion-section').style.display = 'none';
+  }
+}
+
+function setDoc(campo, val, el) {
+  form[campo] = val;
+  var siblings = el.parentNode.querySelectorAll('.tg-btn');
+  for (var i=0;i<siblings.length;i++) { siblings[i].classList.remove('si','no'); }
+  el.classList.add(val === 'SI' ? 'si' : 'no');
+}
+
+function setSecuestroDoc(campo, val, el) {
+  form[campo] = val;
+  var siblings = el.parentNode.querySelectorAll('.tg-btn');
+  for (var i=0;i<siblings.length;i++) { siblings[i].classList.remove('si','no'); }
+  el.classList.add(val === 'SI' ? 'si' : 'no');
+}
+
+function handleFoto(input, posicion) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      fotos[posicion] = e.target.result;
+      var btn = document.getElementById('foto-' + posicion + '-btn');
+      btn.innerHTML = '<img src="' + e.target.result + '" class="foto-preview"><button class="foto-remove" onclick="eliminarFoto(event,\'' + posicion + '\')">✕</button>';
+      btn.classList.add('has-image');
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function eliminarFoto(e, posicion) {
+  e.stopPropagation();
+  fotos[posicion] = null;
+  var btn = document.getElementById('foto-' + posicion + '-btn');
+  var labels = {frente:'FRENTE', dorso:'DORSO', lateral:'LATERAL'};
+  btn.innerHTML = '<span class="foto-icon">📷</span><span class="foto-lbl">' + labels[posicion] + '</span>';
+  btn.classList.remove('has-image');
+  document.getElementById('foto-' + posicion + '-input').value = '';
+}
+
+function validarFotos() {
+  if (!fotos.frente || !fotos.dorso || !fotos.lateral) {
+    showToast('Faltan fotos del vehículo (frente, dorso y lateral)', 'err');
+    return false;
+  }
+  return true;
+}
+
+function guardarActa() {
+  if (!form.tipo_acta) { showToast('Seleccioná el tipo de acta', 'err'); return; }
+  if (form.tipo_acta === 'secuestro' && !validarFotos()) return;
+
+  var now = new Date();
+  var n = rows.length + 1;
+  var inspector  = document.getElementById('act-inspector').value.trim() || '--';
+  var legajoInsp = document.getElementById('act-legajo-insp').value.trim() || '--';
+  var secretario = document.getElementById('act-secretario').value.trim() || '--';
+  var legajoSec  = document.getElementById('act-legajo-sec').value.trim() || '--';
+  var nroActa    = document.getElementById('f-nro-acta').value.trim() || '--';
+  var fecha      = document.getElementById('f-fecha').value || '--';
+  var hora       = document.getElementById('f-hora').value || '--';
+  var direccion  = document.getElementById('f-direccion').value.trim() || '--';
+  var conductor  = document.getElementById('f-conductor').value.trim() || '--';
+  var dni        = document.getElementById('f-dni').value.trim() || '--';
+  var domicilio  = document.getElementById('f-domicilio').value.trim() || '--';
+  var descripcion= document.getElementById('f-descripcion').value.trim() || '--';
+
+  var row = {
+    n:n,
+    fecha_registro: String(now.getDate()).padStart(2,'0')+'/'+(now.getMonth()+1)+'/'+now.getFullYear(),
+    hora_registro:  String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0'),
+    inspector:inspector, legajo_insp:legajoInsp,
+    secretario:secretario, legajo_sec:legajoSec,
+    tipo_acta: form.tipo_acta === 'multa' ? 'MULTA' : 'SECUESTRO + MULTA',
+    nro_acta:nroActa, fecha_hecho:fecha, hora_hecho:hora,
+    direccion:direccion, conductor:conductor, dni:dni, domicilio:domicilio,
+    descripcion:descripcion
+  };
+
+  if (form.tipo_acta === 'multa') {
+    row.registro=form.registro||'--'; row.casco=form.casco||'--'; row.seguro=form.seguro||'--';
+    row.tipo_vehiculo='--'; row.marca='--'; row.modelo='--'; row.chasis='--'; row.color='--'; row.dominio='--';
+    row.niega_firmar='--'; row.fuga='--'; row.foto_frente='--'; row.foto_dorso='--'; row.foto_lateral='--';
+  } else {
+    row.registro='--'; row.casco='--'; row.seguro='--';
+    row.tipo_vehiculo=document.getElementById('f-sec-tipo').value.trim()||'--';
+    row.marca=document.getElementById('f-sec-marca').value.trim()||'--';
+    row.modelo=document.getElementById('f-sec-modelo').value.trim()||'--';
+    row.chasis=document.getElementById('f-sec-chasis').value.trim()||'--';
+    row.color=document.getElementById('f-sec-color').value.trim()||'--';
+    row.dominio=document.getElementById('f-sec-dominio').value.trim()||'--';
+    row.niega_firmar=form.niega_firmar||'--'; row.fuga=form.fuga||'--';
+    row.foto_frente=fotos.frente?'[FOTO_FRENTE]':'--';
+    row.foto_dorso=fotos.dorso?'[FOTO_DORSO]':'--';
+    row.foto_lateral=fotos.lateral?'[FOTO_LATERAL]':'--';
+    try { localStorage.setItem('fotos_acta_'+n, JSON.stringify(fotos)); } catch(e) {}
+  }
+
+  rows.push(row);
+  try { localStorage.setItem(RKEY, JSON.stringify(rows)); } catch(e) {}
+
+  if (cfg.url) {
+    try { fetch(cfg.url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(row)}); } catch(e) {}
+  }
+
+  renderStats(); renderLog(); limpiar();
+  showToast('Acta #'+nroActa+' registrada', 'ok');
+}
+
+function limpiar() {
+  form = { tipo_acta:'', registro:'', casco:'', seguro:'', niega_firmar:'', fuga:'' };
+  fotos = {frente:null, dorso:null, lateral:null};
+  document.getElementById('tipo-multa').className='tipo-item';
+  document.getElementById('tipo-secuestro').className='tipo-item';
+  document.getElementById('secuestro-section').classList.remove('visible');
+  document.getElementById('documentacion-section').style.display='block';
+  ['frente','dorso','lateral'].forEach(function(pos) {
+    var btn = document.getElementById('foto-'+pos+'-btn');
+    var labels={frente:'FRENTE',dorso:'DORSO',lateral:'LATERAL'};
+    btn.innerHTML='<span class="foto-icon">📷</span><span class="foto-lbl">'+labels[pos]+'</span>';
+    btn.classList.remove('has-image');
+    document.getElementById('foto-'+pos+'-input').value='';
+  });
+  setFechaHoraActual();
+  ['f-nro-acta','f-direccion','f-conductor','f-dni','f-domicilio','f-descripcion',
+   'f-sec-tipo','f-sec-marca','f-sec-modelo','f-sec-chasis','f-sec-color','f-sec-dominio']
+  .forEach(function(id){ document.getElementById(id).value=''; });
+  document.querySelectorAll('.tg-btn').forEach(function(b){ b.classList.remove('si','no'); });
+}
+
+function renderStats() {
+  var secuestros=0, hoy=0;
+  var today=new Date();
+  var hoyStr=String(today.getDate()).padStart(2,'0')+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+  for (var i=0;i<rows.length;i++) {
+    if (rows[i].tipo_acta==='SECUESTRO + MULTA') secuestros++;
+    if (rows[i].fecha_registro===hoyStr) hoy++;
+  }
+  document.getElementById('st-total').textContent=rows.length;
+  document.getElementById('st-secuestro').textContent=secuestros;
+  document.getElementById('st-hoy').textContent=hoy;
+}
+
+function renderLog() {
+  var wrap=document.getElementById('log-wrap');
+  var list=document.getElementById('log-list');
+  if (rows.length===0) { wrap.style.display='none'; return; }
+  wrap.style.display='block';
+  var html='';
+  for (var i=rows.length-1;i>=0;i--) {
+    var r=rows[i];
+    var chips='<span class="chip a">#'+r.nro_acta+'</span>';
+    if (r.tipo_acta==='SECUESTRO + MULTA') {
+      chips+='<span class="chip r">🚫 '+r.tipo_acta+'</span>';
+      if (r.dominio!=='--') chips+='<span class="chip b">'+r.dominio+'</span>';
+      if (r.fuga==='SI') chips+='<span class="chip r">FUGA</span>';
+      if (r.foto_frente!=='--') chips+='<span class="chip g">📸</span>';
+    } else {
+      chips+='<span class="chip g">📄 '+r.tipo_acta+'</span>';
+      if (r.registro==='NO') chips+='<span class="chip r">SIN REGISTRO</span>';
+      if (r.casco==='NO') chips+='<span class="chip r">SIN CASCO</span>';
+      if (r.seguro==='NO') chips+='<span class="chip r">SIN SEGURO</span>';
+    }
+    chips+='<span class="chip">'+r.hora_hecho+'</span>';
+    if (r.inspector!=='--') chips+='<span class="chip t">'+r.inspector+'</span>';
+    html+='<div class="log-item"><div class="chips">'+chips+'</div><button class="del-btn" onclick="borrar('+r.n+')">✕</button></div>';
+  }
+  list.innerHTML=html;
+}
+
+function borrar(n) {
+  try { localStorage.removeItem('fotos_acta_'+n); } catch(e) {}
+  rows=rows.filter(function(r){ return r.n!==n; });
+  try { localStorage.setItem(RKEY, JSON.stringify(rows)); } catch(e) {}
+  renderStats(); renderLog();
+}
+
+function exportCSV() {
+  if (rows.length===0) { showToast('No hay registros aún','err'); return; }
+  var hdrs=['N','Fecha Registro','Hora Registro','Inspector','Legajo Inspector','Secretario','Legajo Secretario','Tipo Acta','N° Acta','Fecha Hecho','Hora Hecho','Dirección','Conductor','DNI','Domicilio','Tipo Vehículo','Marca','Modelo','Chasis','Color','Dominio','Registro','Casco','Seguro','Niega Firmar','Fuga','Foto Frente','Foto Dorso','Foto Lateral','Descripción'];
+  var lines=[hdrs.join(',')];
+  for (var i=0;i<rows.length;i++) {
+    var r=rows[i];
+    var vals=[r.n,r.fecha_registro,r.hora_registro,r.inspector,r.legajo_insp,r.secretario,r.legajo_sec,r.tipo_acta,r.nro_acta,r.fecha_hecho,r.hora_hecho,r.direccion,r.conductor,r.dni,r.domicilio,r.tipo_vehiculo,r.marca,r.modelo,r.chasis,r.color,r.dominio,r.registro,r.casco,r.seguro,r.niega_firmar,r.fuga,r.foto_frente,r.foto_dorso,r.foto_lateral,r.descripcion];
+    lines.push(vals.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(','));
+  }
+  var blob=new Blob(['\uFEFF'+lines.join('\n')],{type:'text/csv;charset=utf-8;'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url; a.download='actas_comprobacion_cem.csv'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('CSV exportado','ok');
+}
+
+function showToast(msg, tipo) {
+  var t=document.getElementById('toast');
+  t.textContent=msg;
+  t.className='toast show '+(tipo||'');
+  setTimeout(function(){ t.className='toast'; }, 2500);
+}
+
+init();
+</script>
+</body>
+</html>
